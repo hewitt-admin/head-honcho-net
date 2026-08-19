@@ -1,5 +1,7 @@
 # WEBSITE PLAN
 
+All photos/images can be found at `init-images/`.
+
 Business Name:
 Hewitt's Rocking H Trailer & ATV Repair
 
