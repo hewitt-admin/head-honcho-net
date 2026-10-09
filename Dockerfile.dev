@@ -1,0 +1,45 @@
+FROM node:22.16.0-bookworm-slim@sha256:048ed02c5fd52e86fda6fbd2f6a76cf0d4492fd6c6fee9e2c463ed5108da0e34
+
+ARG GIT_VERSION=1:2.39.5-0+deb12u3
+ARG COREPACK_VERSION=0.36.0
+ARG PNPM_VERSION=10.12.1
+ARG GH_VERSION=2.102.0
+ARG GH_AMD64_SHA256=bb766f710eef8ede859c18578c72c327597cd4c8a85b06001b1f3843c6019386
+ARG GH_ARM64_SHA256=7862c86c72f43df3a2d93ddde6f473285b4e2af61b494849846827e513ef6484
+ARG CLAUDE_CODE_VERSION=2.1.295
+ARG CODEX_VERSION=0.162.0
+
+ENV COREPACK_HOME=/opt/corepack
+
+RUN apt-get update \
+    && apt-get install --no-install-recommends -y \
+        ca-certificates \
+        curl \
+        git="${GIT_VERSION}" \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN set -eu; \
+    case "$(dpkg --print-architecture)" in \
+        amd64) gh_arch=amd64; gh_sha256="${GH_AMD64_SHA256}" ;; \
+        arm64) gh_arch=arm64; gh_sha256="${GH_ARM64_SHA256}" ;; \
+        *) echo "Unsupported architecture for GitHub CLI: $(dpkg --print-architecture)" >&2; exit 1 ;; \
+    esac; \
+    gh_archive="gh_${GH_VERSION}_linux_${gh_arch}.tar.gz"; \
+    curl -fsSL "https://github.com/cli/cli/releases/download/v${GH_VERSION}/${gh_archive}" -o /tmp/gh.tar.gz; \
+    echo "${gh_sha256}  /tmp/gh.tar.gz" | sha256sum --check --status; \
+    tar -xzf /tmp/gh.tar.gz --strip-components=2 -C /usr/local/bin "gh_${GH_VERSION}_linux_${gh_arch}/bin/gh"; \
+    rm /tmp/gh.tar.gz
+
+RUN npm install --global \
+        "corepack@${COREPACK_VERSION}" \
+        "@anthropic-ai/claude-code@${CLAUDE_CODE_VERSION}" \
+        "@openai/codex@${CODEX_VERSION}" \
+    && corepack enable \
+    && corepack prepare "pnpm@${PNPM_VERSION}" --activate \
+    && chown -R node:node "${COREPACK_HOME}"
+
+RUN mkdir -p /workspace \
+    && chown node:node /workspace
+
+USER node
+WORKDIR /workspace
