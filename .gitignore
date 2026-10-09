@@ -1,0 +1,9 @@
+node_modules
+.next
+out
+coverage
+.vitest
+.pnpm-store
+*.tsbuildinfo
+.DS_Store
+npm-debug.log*

@@ -1,0 +1,91 @@
+.page {
+  width: min(980px, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: 4rem 0 5rem;
+}
+
+.contactCard {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(211, 176, 97, 0.18);
+  border-radius: 1.4rem;
+  padding: clamp(1.5rem, 3vw, 3rem);
+  box-shadow: 0 18px 28px rgba(0, 0, 0, 0.18);
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(211, 176, 97, 0.12);
+  color: #d3b061;
+  border: 1px solid rgba(211, 176, 97, 0.2);
+  padding: 0.45rem 0.8rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin: 0 0 1rem;
+}
+
+.title {
+  margin: 0 0 0.8rem;
+  font-size: clamp(2.25rem, 4vw, 3.4rem);
+  letter-spacing: -0.04em;
+}
+
+.copy {
+  margin: 0 0 1.5rem;
+  color: rgba(255, 255, 255, 0.78);
+  max-width: 60ch;
+}
+
+.contactList {
+  display: grid;
+  gap: 1rem;
+}
+
+.contactLink {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding: 1rem 1.1rem;
+  border-radius: 1rem;
+  background: rgba(17, 17, 17, 0.34);
+  border: 1px solid rgba(211, 176, 97, 0.12);
+  color: #f5f0e8;
+}
+
+.label {
+  color: #d3b061;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.72rem;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  margin-top: 1.8rem;
+}
+
+.primaryButton,
+.secondaryButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  padding: 0.85rem 1.5rem;
+  font-weight: 700;
+}
+
+.primaryButton {
+  background: linear-gradient(135deg, #d3b061, #b48a3a);
+  color: var(--color-black);
+}
+
+.secondaryButton {
+  border: 1px solid rgba(211, 176, 97, 0.32);
+  color: #f5f0e8;
+  background: transparent;
+}
