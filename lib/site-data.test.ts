@@ -14,7 +14,7 @@ describe('contact helpers', () => {
 
 describe('homepage images', () => {
   it('keeps every referenced image available in public assets', () => {
-    const imagePaths = ['/images/shop-hero.jpg', ...galleryItems.map(({ src }) => src)];
+    const imagePaths = ['/images/shop-hero-exterior.jpg', ...galleryItems.map(({ src }) => src)];
 
     imagePaths.forEach((imagePath) => {
       expect(existsSync(join(process.cwd(), 'public', imagePath.slice(1))), `${imagePath} should exist`).toBe(true);
