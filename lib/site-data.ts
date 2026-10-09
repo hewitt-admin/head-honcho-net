@@ -33,34 +33,34 @@ export const serviceList = [
 
 export const galleryItems = [
   {
-    src: '/images/shop-hero.jpg',
-    alt: 'Exterior view of Hewitt\'s Rocking H shop and service building',
-    caption: 'The shop and service building',
+    src: '/images/building-shop-extension.jpg',
+    alt: 'Work on the shop extension',
+    caption: 'Building the shop extension',
   },
   {
-    src: '/images/addition.jpg',
-    alt: 'Construction and expansion work at the service building',
-    caption: 'Building the new addition',
+    src: '/images/repairing-four-wheeler.jpg',
+    alt: 'Repairing a four-wheeler in the shop',
+    caption: 'Repairing a four-wheeler',
   },
   {
-    src: '/images/repair-bench.jpg',
-    alt: 'Equipment under repair on the shop bench',
-    caption: 'Machines in the shop',
+    src: '/images/repaired-four-wheeler-pulled-transmission.jpg',
+    alt: 'A four-wheeler with its transmission removed during repair',
+    caption: 'A four-wheeler repair in progress',
   },
   {
-    src: '/images/finished-work.jpg',
-    alt: 'Finished repair work ready for customer pickup',
-    caption: 'Finished repairs',
+    src: '/images/finished-four-wheeler-outside-shop.jpg',
+    alt: 'A repaired four-wheeler outside the shop',
+    caption: 'Ready to ride',
   },
   {
-    src: '/images/shop-interior.jpg',
-    alt: 'Interior of the Rocking H repair shop and workspace',
-    caption: 'Inside the shop',
+    src: '/images/finished-shop-interior-from-behind-desk.jpg',
+    alt: 'The finished shop interior viewed from behind the desk',
+    caption: 'Inside the finished shop',
   },
   {
-    src: '/images/tools.jpg',
-    alt: 'Workshop tools and equipment used for trailer and ATV repairs',
-    caption: 'Equipment and tools',
+    src: '/images/josiah-installing-a-safe-in-finished-shop.jpg',
+    alt: 'Josiah installing a safe in the finished shop',
+    caption: 'Finishing touches in the shop',
   },
 ];
 

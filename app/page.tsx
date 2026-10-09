@@ -36,7 +36,7 @@ export default function HomePage() {
             <div className={styles.hero__media}>
               <div className={styles.hero__image}>
                 <Image
-                  src="/images/shop-hero.jpg"
+                  src="/images/shop-hero-exterior.jpg"
                   alt="Exterior view of the Rocking H shop and service building"
                   width={780}
                   height={1000}
