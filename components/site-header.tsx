@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 import { navLinks } from '@/lib/site-data';
@@ -11,8 +12,20 @@ export default function SiteHeader() {
   return (
     <header className={styles['site-header']}>
       <div className={styles['site-header__inner']}>
-        <Link href="/" className={styles['site-header__brand']} onClick={() => setIsNavOpen(false)}>
-          Hewitt&apos;s Rocking H
+        <Link
+          href="/"
+          className={styles['site-header__brand']}
+          aria-label="Hewitt's Rocking H Trailer and ATV Repair home"
+          onClick={() => setIsNavOpen(false)}
+        >
+          <Image
+            src="/images/head-honcho-net-logo-simplified.jpg"
+            alt="Hewitt's Rocking H Trailer and ATV Repair logo"
+            width={760}
+            height={200}
+            className={styles['site-header__logo']}
+            priority
+          />
         </Link>
 
         <button
