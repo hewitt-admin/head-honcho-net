@@ -16,13 +16,13 @@ container_version="$(tr -d '[:space:]' < "${version_file}")"
 
 command -v docker >/dev/null 2>&1 || fail "Docker is required. Install Docker Desktop or Docker Engine."
 docker info >/dev/null 2>&1 || fail "Docker is not running or is not accessible to this user."
-command -v code >/dev/null 2>&1 || fail "The VS Code 'code' command is required; install it from VS Code."
-code --list-extensions 2>/dev/null | grep -Fxq 'ms-vscode-remote.remote-containers' \
-    || fail "Install the VS Code Dev Containers extension: code --install-extension ms-vscode-remote.remote-containers"
 
 origin_url="$(git -C "${repo_root}" remote get-url origin 2>/dev/null)" \
     || fail "The source repository must have an 'origin' remote."
 [[ -n "${origin_url}" ]] || fail "The source repository's 'origin' remote URL is empty."
+docker_context="$(docker context show)" \
+    || fail "Could not determine the active Docker context."
+[[ -n "${docker_context}" ]] || fail "The active Docker context name is empty."
 
 image_tag="head-honcho-dev:${container_version}"
 if ! docker image inspect "${image_tag}" >/dev/null 2>&1; then
@@ -58,23 +58,16 @@ if ! docker exec "${container_name}" git clone \
     fail "Could not clone the remote default branch '${default_branch}'. Container '${container_name}' and volume '${workspace_volume}' were kept. If the repository is private, authenticate inside the container with 'docker exec -it ${container_name} gh auth login', then clone '${origin_url}' into /workspace."
 fi
 
-remote_config="$(printf '{"containerName":"%s","cwd":"/workspace"}' "${container_name}" \
-    | od -An -tx1 \
-    | tr -d '[:space:]')"
-remote_authority="attached-container+${remote_config}"
-
-if ! code --force-user-env --new-window --remote "${remote_authority}" /workspace; then
-    fail "VS Code could not open the attached container. The container '${container_name}' and volume '${workspace_volume}' are still available; reopen with: code --force-user-env --new-window --remote '${remote_authority}' /workspace"
-fi
-
 printf '\nDevelopment container is ready.\n'
 printf 'Container: %s\n' "${container_name}"
 printf 'Image version: %s (%s)\n' "${container_version}" "${image_tag}"
 printf 'Workspace: /workspace (Docker volume: %s)\n' "${workspace_volume}"
 printf 'Cloned remote default branch: %s\n' "${default_branch}"
+printf 'Docker context: %s\n' "${docker_context}"
 printf 'Stop: docker stop %s\n' "${container_name}"
-printf "Reopen: docker start %s && code --force-user-env --new-window --remote '%s' /workspace\n" \
-    "${container_name}" "${remote_authority}"
+printf 'Reopen container: docker start %s\n' "${container_name}"
+printf 'Attach manually in VS Code: Dev Containers: Attach to Running Container..., then select %s and open /workspace.\n' \
+    "${container_name}"
 printf 'Authenticate from a terminal in the container with: gh auth login, claude, or codex.\n'
 printf 'Cleanup, only when you no longer need this checkout: docker rm -f %s && docker volume rm %s\n' \
     "${container_name}" "${workspace_volume}"
