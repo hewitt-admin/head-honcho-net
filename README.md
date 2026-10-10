@@ -1,6 +1,8 @@
 # head-honcho-net
 
-Website for Hewitt's Rocking H Trailer & ATV Repair.
+Website for Hewitt's Rocking H Trailer & ATV Repair. 
+
+Deployed to <http://headhoncho.net/> and <https://hewitt-admin.github.io/head-honcho-net/>
 
 ## Development Environment
 
