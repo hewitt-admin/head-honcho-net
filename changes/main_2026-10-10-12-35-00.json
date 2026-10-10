@@ -1,0 +1,9 @@
+{
+  "changes": [
+    {
+      "packageName": "head-honcho-net",
+      "comment": "Fixed gallery image URLs for GitHub Pages staging deployments",
+      "type": "PATCH"
+    }
+  ]
+}

@@ -105,7 +105,7 @@ export default function HomePage() {
             {galleryItems.map((item) => (
               <figure className={styles['gallery__item']} key={item.src}>
                 <Image
-                  src={item.src}
+                  src={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ''}${item.src}`}
                   alt={item.alt}
                   width={800}
                   height={600}
