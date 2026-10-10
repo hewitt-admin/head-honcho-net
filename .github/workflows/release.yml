@@ -11,10 +11,21 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: production-release
+  cancel-in-progress: false
+
 jobs:
   release:
     runs-on: ubuntu-latest
     steps:
+      - name: Require main branch
+        run: |
+          if [[ "$GITHUB_REF" != "refs/heads/main" ]]; then
+            echo "::error::Run the release workflow from main."
+            exit 1
+          fi
+
       - name: Check out repository
         uses: actions/checkout@v4
 
@@ -32,6 +43,28 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Bump version and update changelog
+        run: pnpm changelog:publish
+
+      - name: Verify release version and compiled changes
+        env:
+          RELEASE_TAG: ${{ inputs.release_tag }}
+        run: |
+          git check-ref-format "refs/tags/$RELEASE_TAG"
+          if git ls-remote --exit-code --tags origin "refs/tags/$RELEASE_TAG" > /dev/null 2>&1; then
+            echo "::error::Release tag $RELEASE_TAG already exists."
+            exit 1
+          fi
+          PACKAGE_VERSION=$(node -p "require('./package.json').version")
+          if [[ "$RELEASE_TAG" != "v$PACKAGE_VERSION" ]]; then
+            echo "::error::Release tag must be v$PACKAGE_VERSION after applying change entries."
+            exit 1
+          fi
+          if compgen -G "changes/*.json" > /dev/null; then
+            echo "::error::Uncompiled change entries remain. Run pnpm changelog:publish locally, then commit and push the version and changelog updates to main before releasing."
+            exit 1
+          fi
+
       - name: Run tests
         run: pnpm test
 
@@ -40,6 +73,31 @@ jobs:
 
       - name: Build static website
         run: pnpm build
+
+      - name: Commit and push release metadata
+        id: release_commit
+        env:
+          RELEASE_TAG: ${{ inputs.release_tag }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- package.json
+          if [[ -d changes ]]; then
+            git add -A -- changes/
+          fi
+          for changelog_file in CHANGELOG.md CHANGELOG.json; do
+            if [[ -e "$changelog_file" ]] || git ls-files --error-unmatch "$changelog_file" > /dev/null 2>&1; then
+              git add -A -- "$changelog_file"
+            fi
+          done
+          if ! git diff --cached --quiet; then
+            git commit -m "chore: release $RELEASE_TAG"
+            if ! git push origin HEAD:main; then
+              echo "::error::Unable to push release metadata to main. Run pnpm changelog:publish locally, commit and push the version and changelog updates, then rerun the release workflow."
+              exit 1
+            fi
+          fi
+          echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
 
       - name: Package static website
         run: |
@@ -51,9 +109,9 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           RELEASE_TAG: ${{ inputs.release_tag }}
+          RELEASE_SHA: ${{ steps.release_commit.outputs.sha }}
         run: |
-          git check-ref-format "refs/tags/$RELEASE_TAG"
           gh release create "$RELEASE_TAG" static-site.zip \
-            --target "$GITHUB_SHA" \
+            --target "$RELEASE_SHA" \
             --title "$RELEASE_TAG" \
             --generate-notes
