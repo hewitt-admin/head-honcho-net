@@ -1,0 +1,9 @@
+{
+  "changes": [
+    {
+      "packageName": "head-honcho-net",
+      "comment": "Added a changelog to the dev and release flows",
+      "type": "MAJOR"
+    }
+  ]
+}
