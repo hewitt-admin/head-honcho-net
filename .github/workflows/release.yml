@@ -44,7 +44,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Bump version and update changelog
-        run: pnpm changelog:publish
+        run: pnpm cl:publish
 
       - name: Verify release version and compiled changes
         env:
@@ -61,7 +61,7 @@ jobs:
             exit 1
           fi
           if compgen -G "changes/*.json" > /dev/null; then
-            echo "::error::Uncompiled change entries remain. Run pnpm changelog:publish locally, then commit and push the version and changelog updates to main before releasing."
+            echo "::error::Uncompiled change entries remain. Run pnpm cl:publish locally, then commit and push the version and changelog updates to main before releasing."
             exit 1
           fi
 
@@ -93,7 +93,7 @@ jobs:
           if ! git diff --cached --quiet; then
             git commit -m "chore: release $RELEASE_TAG"
             if ! git push origin HEAD:main; then
-              echo "::error::Unable to push release metadata to main. Run pnpm changelog:publish locally, commit and push the version and changelog updates, then rerun the release workflow."
+              echo "::error::Unable to push release metadata to main. Run pnpm cl:publish locally, commit and push the version and changelog updates, then rerun the release workflow."
               exit 1
             fi
           fi

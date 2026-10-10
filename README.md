@@ -13,15 +13,15 @@ Website for Hewitt's Rocking H Trailer & ATV Repair.
 3. Open `/workspace`
 4. Once connected, run `gh auth login`
 
-Before opening a pull request, run `pnpm changelog:change` and commit the
+Before opening a pull request, run `pnpm cl:change` and commit the
 generated entry in `changes/`. Describe the user-visible change and select the
 appropriate version bump.
 
-The release workflow runs `pnpm changelog:publish` to apply accumulated change
+The release workflow runs `pnpm cl:publish` to apply accumulated change
 entries to the project version and changelog, then commits and pushes those
 updates to `main` before creating the release. Run it from `main` with a tag
 matching the resulting version (for example, `v1.2.3`). If branch protection
-prevents the workflow from pushing, run `pnpm changelog:publish` locally,
+prevents the workflow from pushing, run `pnpm cl:publish` locally,
 commit and push the version and changelog updates, then rerun the workflow.
 
 ## Staging deployment
