@@ -22,21 +22,6 @@
   max-width: 620px;
 }
 
-.eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  background: rgba(211, 176, 97, 0.12);
-  color: #d3b061;
-  border: 1px solid rgba(211, 176, 97, 0.2);
-  padding: 0.45rem 0.8rem;
-  border-radius: 999px;
-  font-size: 0.72rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  margin-bottom: 1.5rem;
-}
-
 .hero__title {
   margin: 0;
   font-size: clamp(2.5rem, 5vw, 4.4rem);

@@ -11,7 +11,6 @@ export default function ContactPage() {
 
       <main className={styles.page}>
         <section className={styles.contactCard}>
-          <p className={styles.eyebrow}>Contact</p>
           <h1 className={styles.title}>We&apos;re here to help get you back on track.</h1>
           <p className={styles.copy}>
             Need your ATV, UTV, or trailer repaired? Give us a call today. We&apos;re ready to help get you back to

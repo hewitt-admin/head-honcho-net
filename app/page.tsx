@@ -14,7 +14,6 @@ export default function HomePage() {
         <section className={`${styles.section} ${styles.hero}`} id="home">
           <div className={styles.hero__grid}>
             <div className={styles.hero__content}>
-              <span className={styles.eyebrow}>Trusted local repair shop</span>
               <h1 className={styles.hero__title}>Dependable ATV &amp; Trailer Repair You Can Count On</h1>
               <p className={styles.hero__text}>
                 Welcome to Hewitt&apos;s Rocking H Trailer &amp; ATV Repair. We take pride in providing honest,
