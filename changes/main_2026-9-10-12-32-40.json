@@ -1,0 +1,9 @@
+{
+  "changes": [
+    {
+      "packageName": "head-honcho-net",
+      "comment": "Update github action versions",
+      "type": "NONE"
+    }
+  ]
+}
