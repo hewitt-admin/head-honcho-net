@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "npx serve@latest out",
+    "start": "npx serve out",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
