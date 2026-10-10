@@ -29,7 +29,7 @@ export default function SiteHeader() {
           onClick={() => setIsNavOpen(false)}
         >
           <Image
-            src="/images/head-honcho-net-logo-simplified.jpg"
+            src={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ''}/images/head-honcho-net-logo-simplified.jpg`}
             alt="Hewitt's Rocking H Trailer and ATV Repair logo"
             width={760}
             height={200}

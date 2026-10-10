@@ -1,0 +1,9 @@
+{
+  "changes": [
+    {
+      "packageName": "head-honcho-net",
+      "comment": "Added manual staging deployments to GitHub Pages with correct asset paths",
+      "type": "MINOR"
+    }
+  ]
+}
