@@ -10,8 +10,8 @@
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
-    "changelog:change": "ccg change",
-    "changelog:publish": "ccg publish --apply"
+    "cl:change": "ccg change",
+    "cl:publish": "ccg publish --apply"
   },
   "dependencies": {
     "next": "14.2.15",
