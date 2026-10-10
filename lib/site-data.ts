@@ -4,8 +4,6 @@ export const business = {
   phone: '(218) 416-0801',
   email: 'josiahjames1231994@gmail.com',
   address: 'Viking, MN 56760',
-  reviewDestination:
-    'https://www.google.com/maps/search/?api=1&query=Hewitt%27s+Rocking+H+Trailer+%26+ATV+Repair+Viking+MN+56760',
 };
 
 export const navLinks = [
@@ -13,7 +11,6 @@ export const navLinks = [
   { label: 'Services', href: '/#services' },
   { label: 'Gallery', href: '/#gallery' },
   { label: 'About', href: '/#about' },
-  { label: 'Reviews', href: '/#reviews' },
   { label: 'Contact', href: '/contact' },
 ];
 
@@ -61,24 +58,6 @@ export const galleryItems = [
     src: '/images/josiah-installing-a-safe-in-finished-shop.jpg',
     alt: 'Josiah installing a safe in the finished shop',
     caption: 'Finishing touches in the shop',
-  },
-];
-
-export const testimonials = [
-  {
-    quote:
-      'They got our side-by-side dialed in quickly and explained exactly what needed to be done. Honest, fair, and reliable from start to finish.',
-    name: 'Local rider',
-  },
-  {
-    quote:
-      'The trailer repair work was solid, and the communication was excellent. You can tell these guys care about doing the job right.',
-    name: 'Weekend hauler',
-  },
-  {
-    quote:
-      'We brought in a machine with a stubborn electrical issue and they sorted it out without the runaround. Professional and easy to work with.',
-    name: 'Customer',
   },
 ];
 

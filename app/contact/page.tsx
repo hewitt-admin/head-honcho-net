@@ -38,9 +38,6 @@ export default function ContactPage() {
             <a href={formatPhoneHref(business.phone)} className={styles.primaryButton}>
               Call now
             </a>
-            <a href={business.reviewDestination} className={styles.secondaryButton} target="_blank" rel="noreferrer noopener">
-              Leave a review
-            </a>
             <Link href="/" className={styles.secondaryButton}>
               Back to home
             </Link>

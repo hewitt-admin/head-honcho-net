@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Header from '@/components/site-header';
 import Footer from '@/components/site-footer';
-import { business, galleryItems, serviceList, testimonials, formatPhoneHref } from '@/lib/site-data';
+import { business, galleryItems, serviceList, formatPhoneHref } from '@/lib/site-data';
 import styles from './page.module.scss';
 
 export default function HomePage() {
@@ -116,28 +116,6 @@ export default function HomePage() {
               </figure>
             ))}
           </div>
-        </section>
-
-        <section className={styles.section} id="reviews">
-          <header className={styles['section-header']}>
-            <h2 className={styles['section-header__title']}>Reviews</h2>
-            <p className={styles['section-header__subtitle']}>
-              A few kind words from customers who rely on quality workmanship and honest service.
-            </p>
-          </header>
-
-          <div className={styles.reviews__grid}>
-            {testimonials.map((review) => (
-              <article className={styles['review-card']} key={review.name}>
-                <p className={styles['review-card__quote']}>“{review.quote}”</p>
-                <p className={styles['review-card__author']}>{review.name}</p>
-              </article>
-            ))}
-          </div>
-
-          <a href={business.reviewDestination} className={styles['review-link']} target="_blank" rel="noreferrer noopener">
-            Leave a review on Google
-          </a>
         </section>
 
         <section className={styles['cta-shell']}>
