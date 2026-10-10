@@ -1,0 +1,9 @@
+{
+  "changes": [
+    {
+      "packageName": "head-honcho-net",
+      "comment": "Use serve for hosting the production built site locally",
+      "type": "NONE"
+    }
+  ]
+}
