@@ -63,7 +63,6 @@ export default function HomePage() {
               <article className={styles['service-card']} key={service}>
                 <div className={styles['service-card__icon']}>{index + 1}</div>
                 <h3>{service}</h3>
-                <p>Dependable workmanship and solid repair support for the work you put your equipment through.</p>
               </article>
             ))}
           </div>
