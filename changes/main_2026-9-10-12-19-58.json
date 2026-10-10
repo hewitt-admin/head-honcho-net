@@ -1,0 +1,9 @@
+{
+  "changes": [
+    {
+      "packageName": "head-honcho-net",
+      "comment": "Added init website performance evaluation",
+      "type": "NONE"
+    }
+  ]
+}
