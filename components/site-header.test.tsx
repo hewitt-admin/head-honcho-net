@@ -2,6 +2,21 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import SiteHeader from './site-header';
 
 describe('SiteHeader', () => {
+  it('shrinks while scrolling and restores its original size at the top', () => {
+    render(<SiteHeader />);
+
+    const header = screen.getByRole('banner');
+    expect(header).toHaveAttribute('data-scrolled', 'false');
+
+    Object.defineProperty(window, 'scrollY', { value: 100, configurable: true });
+    fireEvent.scroll(window);
+    expect(header).toHaveAttribute('data-scrolled', 'true');
+
+    Object.defineProperty(window, 'scrollY', { value: 0, configurable: true });
+    fireEvent.scroll(window);
+    expect(header).toHaveAttribute('data-scrolled', 'false');
+  });
+
   it('opens and closes the mobile navigation menu', () => {
     render(<SiteHeader />);
 

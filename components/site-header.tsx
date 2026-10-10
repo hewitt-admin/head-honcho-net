@@ -2,15 +2,25 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { navLinks } from '@/lib/site-data';
 import styles from './site-header.module.scss';
 
 export default function SiteHeader() {
   const [isNavOpen, setIsNavOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const updateScrollState = () => setIsScrolled(window.scrollY > 0);
+
+    updateScrollState();
+    window.addEventListener('scroll', updateScrollState, { passive: true });
+
+    return () => window.removeEventListener('scroll', updateScrollState);
+  }, []);
 
   return (
-    <header className={styles['site-header']}>
+    <header className={styles['site-header']} data-scrolled={isScrolled}>
       <div className={styles['site-header__inner']}>
         <Link
           href="/"
